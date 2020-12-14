@@ -513,7 +513,7 @@ class PrintAbout(History):
             self.textEdit.setText(f.read())
 
 
-class Admin(PrintAbout):
+class Admin(History):
     def __init__(self):
         super().__init__()
         self.setupUi(self)

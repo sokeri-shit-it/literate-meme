@@ -270,19 +270,19 @@ class History(MyAnalyzer):
                             '{self.fol_name.text()}%' order by data desc""").fetchall()
                     print('test4')
 
-                elif self.work.currentIndex() == 0 and self.sort_to_new.currentIndex() == 0\
+                elif self.work.currentIndex() == 0 and self.sort_to_new.currentIndex() == 0 \
                         and not self.fol_name.text():
                     self.result = self.cur_history.execute(
                         """select * from history order by data asc, workload asc""").fetchall()
                     print('t5')
 
-                elif self.work.currentIndex() == 1 and self.sort_to_new.currentIndex() == 1\
+                elif self.work.currentIndex() == 1 and self.sort_to_new.currentIndex() == 1 \
                         and not self.fol_name.text():
                     self.result = self.cur_history.execute(
                         """select * from history order by data desc, workload desc""").fetchall()
                     print('t6')
 
-                elif self.work.currentIndex() == 0 and self.sort_to_new.currentIndex()\
+                elif self.work.currentIndex() == 0 and self.sort_to_new.currentIndex() \
                         == 1 and not self.fol_name.text():
                     self.result = self.cur_history.execute(
                         """select * from history order by data asc, workload desc""").fetchall()
@@ -294,25 +294,25 @@ class History(MyAnalyzer):
                         """select * from history order by data desc, workload asc""").fetchall()
                     print('t7')
 
-                elif self.work.currentIndex() == 0 and self.sort_to_new.currentIndex() == 0\
+                elif self.work.currentIndex() == 0 and self.sort_to_new.currentIndex() == 0 \
                         and self.fol_name.text():
                     self.result = self.cur_history.execute(f"""select * from history where folder_name like 
                                 {self.fol_name.text()} order by data, workload""").fetchall()
                     print('t8')
 
-                elif self.work.currentIndex() == 1 and self.sort_to_new.currentIndex() == 1\
+                elif self.work.currentIndex() == 1 and self.sort_to_new.currentIndex() == 1 \
                         and self.fol_name.text():
                     self.result = self.cur_history.execute(f"""select * from history where folder_name like 
                                 {self.fol_name.text()} order by data desc, workload desc""").fetchall()
                     print('t9')
 
-                elif self.work.currentIndex() == 0 and self.sort_to_new.currentIndex() == 1\
+                elif self.work.currentIndex() == 0 and self.sort_to_new.currentIndex() == 1 \
                         and self.fol_name.text():
                     self.result = self.cur_history.execute(f"""select * from history where folder_name like 
                                 {self.fol_name.text()} order by data, workload desc""").fetchall()
                     print('t10')
 
-                elif self.work.currentIndex() == 0 and self.sort_to_new.currentIndex() == 1\
+                elif self.work.currentIndex() == 0 and self.sort_to_new.currentIndex() == 1 \
                         and self.fol_name.text():
                     self.result = self.cur_history.execute(f"""select * from history where folder_name like 
                                 {self.fol_name.text()} order by data desc, workload asc""").fetchall()
@@ -410,22 +410,22 @@ class History(MyAnalyzer):
                         .fetchall()
                     print('test4')
 
-                elif self.work.currentIndex() == 0 and self.sort_to_new.currentIndex() == 0\
+                elif self.work.currentIndex() == 0 and self.sort_to_new.currentIndex() == 0 \
                         and not self.fol_name.text():
                     self.result = self.cur_history.execute(
                         """select * from disk_desk order by data asc, workload asc""").fetchall()
 
-                elif self.work.currentIndex() == 1 and self.sort_to_new.currentIndex() == 1\
+                elif self.work.currentIndex() == 1 and self.sort_to_new.currentIndex() == 1 \
                         and not self.fol_name.text():
                     self.result = self.cur_history.execute(
                         """select * from disk_desk order by data desc, workload desc""").fetchall()
 
-                elif self.work.currentIndex() == 0 and self.sort_to_new.currentIndex() == 1\
+                elif self.work.currentIndex() == 0 and self.sort_to_new.currentIndex() == 1 \
                         and not self.fol_name.text():
                     self.result = self.cur_history.execute(
                         """select * from disk_desk order by data asc, workload desc""").fetchall()
 
-                elif self.work.currentIndex() == 1 and self.sort_to_new.currentIndex() == 0\
+                elif self.work.currentIndex() == 1 and self.sort_to_new.currentIndex() == 0 \
                         and not self.fol_name.text():
                     self.result = self.cur_history.execute(
                         """select * from disk_desk order by data desc, workload asc""").fetchall()
@@ -513,7 +513,137 @@ class PrintAbout(History):
             self.textEdit.setText(f.read())
 
 
-class PrintWidget(PrintAbout):
+class Admin(PrintAbout):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.con_django = sqlite3.connect('db.sqlite3')
+        self.cur_django = self.con_django.cursor()
+        self.show_table_2.clicked.connect(self.show_auth)
+        self.show_table_3.clicked.connect(self.show_django)
+        self.delete_values_1.clicked.connect(self.delete)
+        self.delete_values_2.clicked.connect(self.delete)
+
+    def show_auth(self):
+        try:
+            if self.select_table_2.currentIndex() == 0:
+                self.result = self.cur_django.execute("""select * from auth_group""").fetchall()
+
+            elif self.select_table_2.currentIndex() == 1:
+                self.result = self.cur_django.execute("""select * from auth_group_permissions""").fetchall()
+
+            elif self.select_table_2.currentIndex() == 2:
+                self.result = self.cur_django.execute("""select * from auth_permission""").fetchall()
+
+            elif self.select_table_2.currentIndex() == 3:
+                self.result = self.cur_django.execute("""select * from auth_user""").fetchall()
+
+            elif self.select_table_2.currentIndex() == 4:
+                self.result = self.cur_django.execute("""select * from auth_user_groups""").fetchall()
+
+            elif self.select_table_2.currentIndex() == 5:
+                self.result = self.cur_django.execute("""select * from auth_user_user_permissions""").fetchall()
+
+            if not self.result:
+                self.statusBar().showMessage('Простите но в данной таблице нет данных')
+
+            else:
+                self.statusBar().showMessage(f'Нашлось записей: {len(self.result)}')
+                self.tableWidget_3.setRowCount(len(self.result))
+
+                self.tableWidget_3.setColumnCount(len(self.result[0]))
+
+                self.titles = [description[0] for description in self.cur_django.description]
+
+                self.tableWidget_3.setHorizontalHeaderLabels(self.titles)
+                header = self.tableWidget_3.horizontalHeader()
+                for i in range(len(self.result[0])):
+                    header.setSectionResizeMode(i, QHeaderView.ResizeToContents)
+                for i, elem in enumerate(self.result):
+                    for j, val in enumerate(elem):
+                        self.tableWidget_3.setItem(i, j, QTableWidgetItem(str(val)))
+                self.modified = {}
+
+        except Error as e:
+            print(e)
+
+        except Exception as es:
+            print(es)
+
+    def show_django(self):
+        try:
+            if self.select_table_3.currentIndex() == 0:
+                self.result = self.cur_django.execute("""select * from django_admin_log""").fetchall()
+                if not self.result:
+                    self.statusBar().showMessage(f'В таблице {self.comboBox.currentText()} пусто')
+
+            elif self.select_table_3.currentIndex() == 1:
+                self.result = self.cur_django.execute("""select * from django_content_type""").fetchall()
+                if not self.result:
+                    self.statusBar().showMessage(f'В таблице {self.comboBox.currentText()} пусто')
+
+            elif self.select_table_3.currentIndex() == 2:
+                self.result = self.cur_django.execute("""select * from django_migrations""").fetchall()
+                if not self.result:
+                    self.statusBar().showMessage(f'В таблице {self.comboBox.currentText()} пусто')
+
+            elif self.select_table_3.currentIndex() == 3:
+                self.result = self.cur_django.execute("""select * from django_session""").fetchall()
+                if not self.result:
+                    self.statusBar().showMessage(f'В таблице {self.comboBox.currentText()} пусто')
+
+            self.statusBar().showMessage(f'Нашлось записей: {len(self.result)}')
+            self.tableWidget_4.setRowCount(len(self.result))
+
+            self.tableWidget_4.setColumnCount(len(self.result[0]))
+            self.titles = [description[0] for description in self.cur_django.description]
+
+            self.tableWidget_4.setHorizontalHeaderLabels(self.titles)
+            header = self.tableWidget_4.horizontalHeader()
+            for i in range(len(self.result[0])):
+                header.setSectionResizeMode(i, QHeaderView.ResizeToContents)
+
+            for i, elem in enumerate(self.result):
+                for j, val in enumerate(elem):
+                    self.tableWidget_4.setItem(i, j, QTableWidgetItem(str(val)))
+            self.modified = {}
+
+        except Error as e:
+            print(e)
+
+        except Exception as es:
+            print(es)
+
+    def delete(self):
+        if self.select_table_2.isEnabled():
+            rows = list(set([i.row() for i in self.tableWidget_3.selectedItems()]))
+            print(rows)
+            ids = [self.tableWidget_3.item(i, 0).text() for i in rows]
+            print(ids)
+
+            valid = QMessageBox.question(
+                self, '', "Действительно удалить элементы с id " + ",".join(ids),
+                QMessageBox.Yes, QMessageBox.No)
+            if valid == QMessageBox.Yes:
+                self.cur_django.execute(f"DELETE FROM {self.select_table_2.currentText()} WHERE id IN (" + ", ".join(
+                    '?' * len(ids)) + ")", ids)
+                self.con_django.commit()
+
+        elif self.select_table_3.isEnabled():
+            rows = list(set([i.row() for i in self.tableWidget_4.selectedItems()]))
+            ids = [self.tableWidget_4.item(i, 0).text() for i in rows]
+            # Спрашиваем у пользователя подтверждение на удаление элементов
+            valid = QMessageBox.question(
+                self, '', "Действительно удалить элементы с id " + ",".join(ids),
+                QMessageBox.Yes, QMessageBox.No)
+
+            if valid == QMessageBox.Yes:
+                self.cur_django.execute(f"DELETE FROM {self.select_table_3.currentText()} WHERE id IN (" + ", ".join(
+                    '?' * len(ids)) + ")", ids)
+                self.con_django.commit()
+
+
+class PrintWidget(Admin):
     pass
 
 
