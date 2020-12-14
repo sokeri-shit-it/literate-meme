@@ -270,19 +270,19 @@ class History(MyAnalyzer):
                             '{self.fol_name.text()}%' order by data desc""").fetchall()
                     print('test4')
 
-                elif self.work.currentIndex() == 0 and self.sort_to_new.currentIndex() == 0\
+                elif self.work.currentIndex() == 0 and self.sort_to_new.currentIndex() == 0 \
                         and not self.fol_name.text():
                     self.result = self.cur_history.execute(
                         """select * from history order by data asc, workload asc""").fetchall()
                     print('t5')
 
-                elif self.work.currentIndex() == 1 and self.sort_to_new.currentIndex() == 1\
+                elif self.work.currentIndex() == 1 and self.sort_to_new.currentIndex() == 1 \
                         and not self.fol_name.text():
                     self.result = self.cur_history.execute(
                         """select * from history order by data desc, workload desc""").fetchall()
                     print('t6')
 
-                elif self.work.currentIndex() == 0 and self.sort_to_new.currentIndex()\
+                elif self.work.currentIndex() == 0 and self.sort_to_new.currentIndex() \
                         == 1 and not self.fol_name.text():
                     self.result = self.cur_history.execute(
                         """select * from history order by data asc, workload desc""").fetchall()
@@ -294,25 +294,25 @@ class History(MyAnalyzer):
                         """select * from history order by data desc, workload asc""").fetchall()
                     print('t7')
 
-                elif self.work.currentIndex() == 0 and self.sort_to_new.currentIndex() == 0\
+                elif self.work.currentIndex() == 0 and self.sort_to_new.currentIndex() == 0 \
                         and self.fol_name.text():
                     self.result = self.cur_history.execute(f"""select * from history where folder_name like 
                                 {self.fol_name.text()} order by data, workload""").fetchall()
                     print('t8')
 
-                elif self.work.currentIndex() == 1 and self.sort_to_new.currentIndex() == 1\
+                elif self.work.currentIndex() == 1 and self.sort_to_new.currentIndex() == 1 \
                         and self.fol_name.text():
                     self.result = self.cur_history.execute(f"""select * from history where folder_name like 
                                 {self.fol_name.text()} order by data desc, workload desc""").fetchall()
                     print('t9')
 
-                elif self.work.currentIndex() == 0 and self.sort_to_new.currentIndex() == 1\
+                elif self.work.currentIndex() == 0 and self.sort_to_new.currentIndex() == 1 \
                         and self.fol_name.text():
                     self.result = self.cur_history.execute(f"""select * from history where folder_name like 
                                 {self.fol_name.text()} order by data, workload desc""").fetchall()
                     print('t10')
 
-                elif self.work.currentIndex() == 0 and self.sort_to_new.currentIndex() == 1\
+                elif self.work.currentIndex() == 0 and self.sort_to_new.currentIndex() == 1 \
                         and self.fol_name.text():
                     self.result = self.cur_history.execute(f"""select * from history where folder_name like 
                                 {self.fol_name.text()} order by data desc, workload asc""").fetchall()
@@ -410,22 +410,22 @@ class History(MyAnalyzer):
                         .fetchall()
                     print('test4')
 
-                elif self.work.currentIndex() == 0 and self.sort_to_new.currentIndex() == 0\
+                elif self.work.currentIndex() == 0 and self.sort_to_new.currentIndex() == 0 \
                         and not self.fol_name.text():
                     self.result = self.cur_history.execute(
                         """select * from disk_desk order by data asc, workload asc""").fetchall()
 
-                elif self.work.currentIndex() == 1 and self.sort_to_new.currentIndex() == 1\
+                elif self.work.currentIndex() == 1 and self.sort_to_new.currentIndex() == 1 \
                         and not self.fol_name.text():
                     self.result = self.cur_history.execute(
                         """select * from disk_desk order by data desc, workload desc""").fetchall()
 
-                elif self.work.currentIndex() == 0 and self.sort_to_new.currentIndex() == 1\
+                elif self.work.currentIndex() == 0 and self.sort_to_new.currentIndex() == 1 \
                         and not self.fol_name.text():
                     self.result = self.cur_history.execute(
                         """select * from disk_desk order by data asc, workload desc""").fetchall()
 
-                elif self.work.currentIndex() == 1 and self.sort_to_new.currentIndex() == 0\
+                elif self.work.currentIndex() == 1 and self.sort_to_new.currentIndex() == 0 \
                         and not self.fol_name.text():
                     self.result = self.cur_history.execute(
                         """select * from disk_desk order by data desc, workload asc""").fetchall()
@@ -513,7 +513,7 @@ class PrintAbout(History):
             self.textEdit.setText(f.read())
 
 
-class Admin(History):
+class Admin(PrintAbout):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
