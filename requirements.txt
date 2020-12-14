@@ -1,0 +1,11 @@
+humanize
+PyQt5
+PyQt5-sip
+PyQt5-stubs
+PyQt5Designer
+glob2
+psutil
+python-magic-bin
+libmagic
+python-magic
+
